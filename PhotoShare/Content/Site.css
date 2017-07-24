@@ -1,0 +1,308 @@
+﻿.test {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url('../Images/bg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+@font-face {
+    font-family: 'KBPayTheLady';
+    src: url('../fonts/KBPayTheLady.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Shabrina';
+    src: url('../fonts/Shabrina.otf') format('opentype');
+}
+
+.container a.navbar-brand {
+    font-size: 30px;
+    font-family: Shabrina;
+    color: palevioletred;
+}
+
+
+.navbar-inverse .navbar-nav > li > a{
+    color:white;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 95%;
+}
+
+input #message .form-control {
+    width: 100%;
+}
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+.circular--square {
+    border-radius: 50%;
+}
+
+.article {
+    background: rgba(25, 25, 25, .5);
+    color: white;
+    font-size: 20px;
+    padding-bottom: 5%;
+}
+
+.usefont {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color: white;
+}
+
+
+    .usefont h3 {
+        font-size: 10px;
+    }
+
+    .usefont h1 {
+        font-size: 25px;
+        font-family: KBPayTheLady;
+        color: palevioletred
+    }
+
+.article .text-center {
+    margin: 2%;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    color: white;
+}
+
+
+#footer a{
+    color:palevioletred;
+}
+
+
+
+#artheader #artcontent {
+    width: 90%;
+    padding-top: 2%;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#artcontent p {
+    width: inherit; /* width: 100px; */
+    word-wrap: break-word; /* IE 5.5-7 */
+    white-space: initial;
+    font-size: 10px;
+}
+
+
+#artmaincontent {
+    width: 100%;
+    margin: 2%;
+}
+
+
+
+#artsidebar {
+    float: left;
+    width: 10%;
+    margin: 2%;
+}
+
+.article #footer {
+    margin: 2%;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+}
+
+
+#postcontent {
+    width: 100%;
+    margin: 2%;
+}
+
+
+    #postcontent textarea.form-control {
+        resize: none;
+        width: inherit;
+        height: 64px;
+        overflow: hidden;
+        background-color: gray;
+        border-color: black;
+        color: white;
+    }
+    #commentcontent textarea.form-control {
+        resize: none;
+        width: inherit;
+        height: 32px;
+        overflow: hidden;
+        background-color: white;
+        border-color: black;
+        color: white;
+    }
+    #postcontent input.form-control {
+        resize: none;
+        width: inherit;
+        overflow: hidden;
+        border-color: black;
+        color: lightgrey;
+    }#postcontent input.form-control {
+    resize: none;
+    width: inherit;
+    overflow: hidden;
+    border-color: black;
+    color: dimgrey;
+}
+
+    #postcontent input[type="submit"].form-control:disabled{
+        resize: none;
+        width: inherit;
+        overflow: hidden;
+        border-color: black;
+        color : dimgrey;
+    }
+
+input.hidden {
+    display: none;
+}
+
+#footer a.viewfinder {
+    display: block;
+    text-indent: -9999px; /* hides the link text */
+}
+
+.input-group-addon {
+    background-color: palevioletred;
+    border-color: palevioletred;
+    color: white;
+}
+
+
+.chat__bubble {
+    margin-bottom: 3px;
+    padding: 5px 10px;
+    clear: both;
+    border-radius: 10px 10px 2px 2px;
+}
+
+.chat__bubble--rcvd {
+    background: #f2f2f2;
+    color: black;
+    float: left;
+    border-bottom-right-radius: 10px;
+}
+
+.chat__bubble--sent {
+    background-color: palevioletred;
+    color: white;
+    float: right;
+    border-bottom-left-radius: 10px;
+}
+
+
+.chat__bubble--sent + .chat__bubble--sent {
+        border-top-right-radius: 2px;
+}
+
+.chat__bubble--rcvd + .chat__bubble--rcvd {
+    border-top-left-radius: 2px;
+}
+
+.chat__bubble--stop {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.navbar-inverse .navbar-toggle{
+
+    border-color:palevioletred;
+}
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .chat {
+        list-style-type: none;
+        overflow-y: hidden;
+        display: table-cell;
+        vertical-align: bottom;
+        padding: 5px;
+        width: 40em;
+        height: 10em;
+    }
+    .usefont h1 {
+        font-size: 20px;
+        font-family: KBPayTheLady;
+        color: palevioletred;
+        text-align:center;
+    }
+}
+
+@media only screen and (min-device-width : 480px) and (max-device-width : 768px) {
+    .chat {
+        list-style-type: none;
+        overflow-y: hidden;
+        display: table-cell;
+        vertical-align: bottom;
+        padding: 5px;
+        width: 40em;
+        height: 20em;
+    }
+    .usefont h1 {
+        font-size: 20px;
+        font-family: KBPayTheLady;
+        color: palevioletred;
+            text-align:center;
+    }
+}
+
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+    .chat {
+        list-style-type: none;
+        overflow-y: hidden;
+        display: table-cell;
+        vertical-align: bottom;
+        padding: 5px;
+        width: 10em;
+        height: 20em;
+    }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+    .chat {
+        list-style-type: none;
+        overflow-y: hidden;
+        display: table-cell;
+        vertical-align: bottom;
+        padding: 5px;
+        width: 10em;
+        height: 20em;
+    }
+}
+
+@media only screen and (min-width : 1024px) {
+    .chat {
+        list-style-type: none;
+        overflow-y: hidden;
+        display: table-cell;
+        vertical-align: bottom;
+        padding: 5px;
+        width: 40em;
+        height: 20em;
+    }
+}

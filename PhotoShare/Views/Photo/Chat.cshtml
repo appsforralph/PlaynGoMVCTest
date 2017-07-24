@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Chat";
+}
+<div class="usefont"><h1>Give a little Chat</h1></div>
+
+
+<div class="article">
+    <div id="content">
+        <div class="container">
+            <div class="conbox">
+                <input type="hidden" id="displayname" value="pagulayanralph" />
+
+                <ul id="discussion" class="chat"></ul>
+                <br />
+                <div class="input-group chat__bubble">
+                    <input type="text" class="form-control" id="message" placeholder="Say Something" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="sendmessage">Send</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+
+            var chat = $.connection.chatHub;
+            chat.client.addNewMessageToPage = function (name, message, i) {
+                var classtype = "";
+                if (i == 1) {
+                    classtype = "chat__bubble chat__bubble--rcvd";
+                }
+                else {
+                    classtype = "chat__bubble chat__bubble--sent";
+                }
+                $('#discussion').append('<li  class="' + classtype + '"><strong>' + htmlEncode(name)
+                    + '</strong>: ' + htmlEncode(message) + '</li>');
+            };
+
+
+
+
+            $.connection.hub.start().done(function () {
+                chat.server.send('Admin', 'Hello there :D', 1);
+                chat.server.send('Admin', 'Welcome to the Chat Hub!', 1);
+
+                $('#sendmessage').click(function () {
+                    chat.server.send($('#displayname').val(), 'echo ' + $('#message').val(), 2);
+                    $('#message').val('').focus();
+                });
+            });
+        });
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+}

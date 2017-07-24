@@ -1,0 +1,116 @@
+﻿@model PhotoShare.Models.Comment
+
+
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var commentsModel = (IEnumerable<PhotoShare.Models.Comment>)ViewBag.Comments;
+    var PhotoModel = (PhotoShare.Models.Photo)ViewBag.Photo;
+    //var commentModel = (PhotoShare.Models.Comment)ViewBag.Comment;
+
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.form-control.go').attr('disabled', true);
+        $('.form-control.comment').keyup(function () {
+            if ($(this).val().length != 0)
+                $('.form-control.go').attr('disabled', false);
+            else
+                $('.form-control.go').attr('disabled', true);
+        })
+
+        var item_to_delete;
+        $(".deleteItem").click(function (e) {
+            item_to_delete = $(this).data('id');
+        });
+        $('#btnContinueDelete').click(function () {
+            window.location = "/Photo/Delete/" + item_to_delete;
+        });
+    });
+   
+</script>
+
+<br/>
+<div class="article">
+    <div id="content">
+        <img class="img-responsive" src="@Url.Action("GetImage", "Photo", new { id = PhotoModel.PhotoID }) " />
+    </div>
+    <div id="footer">
+        @Html.DisplayFor(modelItem => PhotoModel.Description) |<a id="deleteItem" class="deleteItem" data-target="#basic" data-toggle="modal" data-id="@PhotoModel.PhotoID">Delete</a>
+    </div>
+</div>
+<hr />
+@if (commentsModel != null)
+{
+    foreach (var item in commentsModel)
+    {
+        <div class="article">
+            <div id="artheader">
+                <div id="artsidebar">
+                    <img class="img-responsive circular--square" src="~/Images/avatar.png" />
+                </div>
+                <div id="artcontent">
+                    @Html.DisplayFor(modelItem => @item.UserName)
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br/>
+    }
+}
+<br />
+@using (Html.BeginForm("Create", "Comments" , new { photoID = PhotoModel.PhotoID }))
+{
+    @Html.AntiForgeryToken();
+<div class="article">
+    <div id="artheader">
+        <div id="artsidebar">
+            <img class="img-responsive circular--square" src="~/Images/avatar.png" />
+        </div>
+        <div id="artcontent">
+            <div class="input-group">
+                @Html.EditorFor(model => model.Content, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @type = "text",
+                           @class = "form-control comment",
+                           @placeholder = "Comment..",
+                           @rows = "1",
+                           @width = 100
+                       }
+                   })
+                <span class="input-group-btn">
+                    <input class="form-control go" type="submit" value="Go" />
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>
+}
+
+<p id="footer">
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this item?
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" type="button" class="btn btn-default">Cancel</button>
+                <button id="btnContinueDelete" type="button" class="btn btn-primary">Delete</button>
+            </div>
+        </div>
+    </div>

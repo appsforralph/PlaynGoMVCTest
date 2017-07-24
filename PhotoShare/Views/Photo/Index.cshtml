@@ -1,0 +1,94 @@
+﻿
+@model PhotoShare.Models.Photo
+@{
+    ViewBag.Title = "Photo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Photolist = (IEnumerable<PhotoShare.Models.Photo>)ViewBag.Photos;
+    var Date = DateTime.Today;
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(
+        function () {
+            $('.form-control.upload').attr('disabled', true);
+            $('input:file').change(
+                function () {
+                    if ($(this).val()) {
+                        $('.form-control.upload').attr('disabled', false);
+                    }
+                    else {
+                        $('.form-control.upload').attr('disabled', true);
+                    }
+                }
+            );
+        });
+</script>
+
+@using (Html.BeginForm("Create", "Photo", FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    @Html.ValidationSummary(true)
+    <div class="article">
+        <div>
+            <div class="panel-heading usefont"><h1>Add Photo</h1></div>
+            <div id="postcontent">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new {
+                @class = "form-control form-control message",
+                @id = "status_message postarea",
+                @placeholder = "Describe this photo",
+                @rows = "10" } })
+
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                <div class="usefont">
+                    <h3>
+                        <input type="file" name="Image" />
+                        @Html.EditorFor(model => model.PhotoFile)
+                    </h3>
+                </div>
+                
+                <input class="form-control upload" type="submit" value="Upload" />
+            </div>
+        </div>
+    </div>
+}
+<br />
+
+@if (Photolist != null)
+{
+    foreach (var item in Photolist)
+    {
+    <div class="article">
+        <div id="artheader">
+            <div id="artsidebar">
+                <img class="img-responsive circular--square" src="../Images/profile.png" />
+            </div>
+            <div id="artcontent">
+                @Html.DisplayFor(modelItem => @item.Username)
+                <p>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </p>
+            </div>
+        </div>
+        <div id="content">
+            <img class="img-responsive" src="@Url.Action("GetImage", "Photo", new { id = item.PhotoID }) " />
+        </div>
+        <div id="footer">
+            @Html.DisplayFor(modelItem => item.Description)
+           | @Html.ActionLink("View", "Display", new { id = item.PhotoID, @class = "viewfinder" }) 
+        </div>
+    </div>
+    <br />
+
+
+    }
+    <br />
+    <article>
+        <div class="text-center" style="color:white">Thank you for coming!</div>
+    </article>
+}
+
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
